@@ -25,7 +25,7 @@ const Header = () => {
             <span className="w-4 h-0.5 bg-white rounded"></span>
           </div>
           <span className="font-bold text-base md:text-xl text-slate-800 tracking-tight max-w-[180px] sm:max-w-none truncate">
-            VIZOVY INNOVATIONS
+           VIZOVY INNOVATIONS PRIVATE LIMITED
           </span>
         </div>
 
