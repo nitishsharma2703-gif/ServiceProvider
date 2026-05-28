@@ -1,30 +1,56 @@
 const HeroSection = () => {
   return (
-    <section id="home" className="text-center py-12 md:py-16 px-4 max-w-4xl mx-auto scroll-mt-20">
+    <section id="home" className="relative text-center py-16 md:py-24 px-4 max-w-3xl mx-auto scroll-mt-20">
+      
+      {/* Decorative Background Glow */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 bg-purple-100/60 rounded-full blur-3xl -z-10" />
+
       {/* Main Heading */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black tracking-tight leading-tight">
-        Find Home <span className="text-purple-600">Service/Repair</span>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
+        Find Professional <br className="hidden sm:block" />
+        <span className="text-purple-600">Service & Repair</span>
         <br />
         Near You
       </h1>
       
       {/* Subheading */}
-      <p className="text-gray-400 mt-3 md:mt-4 text-sm sm:text-base md:text-lg font-normal px-2">
-        Explore Best Home Service & Repair near you
+      <p className="text-slate-500 text-sm md:text-lg mb-10 max-w-md mx-auto px-2">
+        Trusted experts for all your home maintenance needs. Fast, reliable, and just a click away.
       </p>
 
       {/* Search Bar */}
-      <div className="mt-6 md:mt-8 flex items-center max-w-xl mx-auto bg-white border border-gray-200 rounded-full py-1 pl-4 pr-1 shadow-xs focus-within:ring-2 focus-within:ring-purple-400 focus-within:border-transparent transition-all">
-        <input 
-          type="text" 
-          placeholder="Search Services..." 
-          className="w-full text-gray-700 placeholder-gray-400 focus:outline-none text-xs sm:text-sm md:text-base bg-transparent pl-1"
-        />
-        <button className="bg-purple-600 text-white p-2.5 md:p-3 rounded-full hover:bg-purple-700 transition-colors flex items-center justify-center shadow-md flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="relative flex items-center w-full max-w-xl mx-auto bg-white border border-slate-200 rounded-2xl p-2 shadow-xl shadow-purple-500/10 transition-all focus-within:ring-2 focus-within:ring-purple-500/20">
+        <div className="pl-3 text-slate-400">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
+        </div>
+        <input 
+          type="text" 
+          placeholder="Search cleaning, plumbing, repairs..." 
+          className="w-full text-slate-700 placeholder-slate-400 focus:outline-none text-sm md:text-base bg-transparent px-3 py-2"
+        />
+        <button className="hidden sm:block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all">
+          Search
         </button>
+        {/* Mobile Search Button (Icon only) */}
+        <button className="sm:hidden bg-purple-600 text-white p-3 rounded-xl">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Quick Tags */}
+      <div className="mt-8 flex flex-wrap justify-center gap-2">
+        {['Plumbing', 'Cleaning', 'Electrical', 'Painting', 'Repair'].map(tag => (
+          <span 
+            key={tag} 
+            className="text-[10px] md:text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-purple-100 hover:text-purple-700 px-4 py-1.5 rounded-full cursor-pointer transition-colors"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </section>
   );

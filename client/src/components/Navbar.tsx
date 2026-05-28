@@ -1,51 +1,28 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  
   const handleScroll = (id: string) => {
-    setIsOpen(false); // मोबाइल मेनू बंद करने के लिए
+    setIsOpen(false); 
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-xs">
       <div className="flex justify-between items-center px-4 md:px-12 py-4 max-w-7xl mx-auto">
-        {/* Logo */}
-        <div 
-          className="flex items-center space-x-2 cursor-pointer select-none" 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          <div className="w-8 h-8 flex-shrink-0 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-400 flex flex-col justify-center items-center space-y-0.5">
-            <span className="w-4 h-0.5 bg-white rounded"></span>
-            <span className="w-4 h-0.5 bg-white rounded"></span>
-            <span className="w-4 h-0.5 bg-white rounded"></span>
-          </div>
-          <span className="font-bold text-base md:text-xl text-slate-800 tracking-tight max-w-[180px] sm:max-w-none truncate">
-           VIZOVY INNOVATIONS PRIVATE LIMITED
-          </span>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8 font-medium text-gray-700">
-          <a href="#home" className="hover:text-purple-600 transition-colors">Home</a>
-          <a href="#services-show" className="hover:text-purple-600 transition-colors">Services</a>
-          <a href="#about-company" className="hover:text-purple-600 transition-colors">About Us</a>
-        </nav>
-
-        {/* Right Actions (Profile & Hamburger) */}
+        
+        {/* Left Side: Hamburger + Logo */}
         <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-teal-800 flex items-center justify-center text-white font-semibold cursor-pointer shadow-sm hover:opacity-90 text-sm md:text-base">
-            G
-          </div>
-          
-          {/* Mobile Hamburger Button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
             className="md:hidden p-1.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Toggle Menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isOpen ? (
@@ -55,19 +32,58 @@ const Header = () => {
               )}
             </svg>
           </button>
+
+          <div 
+            className="flex items-center space-x-2.5 cursor-pointer select-none group" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <div className="w-9 h-9 flex-shrink-0 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md shadow-purple-200 group-hover:scale-105 transition-transform duration-200">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <path d="M9 14l3 3 4-4" className="text-teal-300 stroke-[3]" />
+              </svg>
+            </div>
+            
+            <span className="font-extrabold text-base md:text-xl text-slate-800 tracking-tight max-w-[150px] sm:max-w-none truncate group-hover:text-purple-600 transition-colors">
+              VIZOVY INNOVATIONS
+              <span className="hidden sm:inline text-slate-400 font-normal text-xs md:text-sm ml-1.5 tracking-normal">PVT. LTD.</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Center: Desktop Navigation Links (बदलाव: यहाँ <button> और handleScroll जोड़ दिया है) */}
+        <nav className="hidden md:flex space-x-8 font-medium text-gray-700">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-purple-600 transition-colors cursor-pointer font-medium">
+            Home
+          </button>
+          <button onClick={() => handleScroll("services-show")} className="hover:text-purple-600 transition-colors cursor-pointer font-medium">
+            Services
+          </button>
+          <button onClick={() => handleScroll("about-company")} className="hover:text-purple-600 transition-colors cursor-pointer font-medium">
+            About Us
+          </button>
+        </nav>
+
+        {/* Right Side: Login Button */}
+        <div className="flex items-center">
+          <Link 
+            to="/auth" 
+            className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-semibold px-4 py-2 md:px-6 md:py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95 text-xs md:text-sm whitespace-nowrap text-center block"
+          >
+            Login/Sign Up
+          </Link>
         </div>
       </div>
 
       {/* Mobile Drawer Navigation */}
       {isOpen && (
         <div className="md:hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1 shadow-inner animate-fadeIn">
-          <a 
-            href="#home" 
-            onClick={() => setIsOpen(false)} 
-            className="block px-3 py-2.5 rounded-xl text-gray-700 font-medium hover:bg-purple-50 hover:text-purple-600 transition-all"
+          <button 
+            onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+            className="w-full text-left block px-3 py-2.5 rounded-xl text-gray-700 font-medium hover:bg-purple-50 hover:text-purple-600 transition-all"
           >
             Home
-          </a>
+          </button>
           <button 
             onClick={() => handleScroll("services-show")} 
             className="w-full text-left block px-3 py-2.5 rounded-xl text-gray-700 font-medium hover:bg-purple-50 hover:text-purple-600 transition-all"

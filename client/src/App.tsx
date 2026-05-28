@@ -1,30 +1,44 @@
-import Navbar from './components/Navbar';
+import {  Routes, Route } from "react-router-dom";
+import Navbar from './components/Navbar'; 
 import HeroSection from './components/HeroSection';
-import ServiceCards from './components/ServiceCards';
-import ServicesShow from './components/ServicesShow';
+import ServiceCategories from './components/ServiceCategories'; 
 import AboutCompany from './components/AboutCompany';
 import Footer from './components/Footer';
+import Gmail from './routes/gmail'; 
+import ServicesPage from './components/ServicesShow'; 
+import AllServices from './components/AlllServices'; 
+import ServiceDetail from './routes/ServicesDetail'; // 1. डिटेल पेज कंपोनेंट को इम्पोर्ट किया
+
+const HomePage = () => {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <HeroSection />
+        <ServiceCategories /> 
+        <AllServices />
+        <AboutCompany />
+      </main>
+      <Footer />
+    </>
+  );
+};
 
 function App() {
   return (
-    /* scroll-smooth जोड़ने से स्क्रॉलिंग एकदम मक्खन जैसी स्मूथ चलेगी */
-    <div className="min-h-screen bg-slate-50/30 font-sans antialiased scroll-smooth">
-
-      {/** Header part 1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣ */}
-      <Navbar />
-      
-      {/** Main content 2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣ */}
-      <main>
-        <HeroSection />
-        <ServiceCards/>
-        <ServicesShow/>
-        <AboutCompany />
-      </main>
-
-      {/** Footer part 3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣ */}
-      <Footer />
-
-    </div>
+   
+      <div className="min-h-screen bg-slate-50/30 font-sans antialiased scroll-smooth">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} /> 
+          
+          
+          <Route path="/services/:id" element={<ServiceDetail />} /> 
+          
+          <Route path="/auth" element={<Gmail />} />
+        </Routes>
+      </div>
+  
   );
 }
 
